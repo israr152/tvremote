@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
                 showModeOptions(mf);
             }
         });
+
     }
 
     private void showModeOptions(final String mf) {
