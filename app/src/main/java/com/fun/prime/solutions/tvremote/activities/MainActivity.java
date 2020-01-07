@@ -8,24 +8,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fun.prime.solutions.tvremote.ManufacturerAdapter;
-import com.fun.prime.solutions.tvremote.codes.CodesManager;
+import com.fun.prime.solutions.tvremote.adapters.ManufacturerAdapter;
 import com.fun.prime.solutions.tvremote.R;
-
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 
 public class MainActivity extends BaseActivity {
     RecyclerView rvMf;
     TextView tvError;
     static String manufacturer;
+    private static boolean isBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +41,10 @@ public class MainActivity extends BaseActivity {
                 showModeOptions(mf);
             }
         });
-
     }
 
     private void showModeOptions(final String mf) {
-        String[] options = new String[]{"IR Mode","Wifi","Bluetooth"};
+        String[] options = new String[]{"IR Mode","Wifi Mode"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Mode");
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -58,18 +52,16 @@ public class MainActivity extends BaseActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 switch (i){
                     case 0:
-                        if(checkIrPerm()){
-                            checkIrAndGotoRemoteAct(mf);
-                        }else{
-                            manufacturer = mf;
-                            requestIrPerm();
-                        }
+//                        if(checkIrPerm()){
+//                            checkIrAndGotoRemoteAct(mf);
+//                        }else{
+//                            manufacturer = mf;
+//                            requestIrPerm();
+//                        }
+                        checkIrAndGotoRemoteAct(mf);
                         break;
                     case 1:
                         gotoRemoteActivity(mf,2);
-                        break;
-                    case 2:
-                        gotoRemoteActivity(mf,3);
                         break;
                 }
             }
@@ -106,6 +98,22 @@ public class MainActivity extends BaseActivity {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isBackPressed){
+            super.onBackPressed();
+        }else{
+            isBackPressed = true;
+            Toast.makeText(this, "Press again to exit!", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isBackPressed = false;
+                }
+            },2000);
+        }
     }
 
 }

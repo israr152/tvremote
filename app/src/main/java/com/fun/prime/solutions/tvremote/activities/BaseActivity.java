@@ -45,7 +45,7 @@ public class BaseActivity extends AppCompatActivity {
     public void setContentView(int layoutResID) {
         ConstraintLayout parentLayout = (ConstraintLayout) getLayoutInflater().inflate(R.layout.activity_base,null);
         getLayoutInflater().inflate(layoutResID,parentLayout,true);
-        super.setContentView(layoutResID);
+        super.setContentView(parentLayout);
     }
 
     protected void enableBackButton(){
@@ -56,7 +56,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected boolean checkIrPerm(){
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.TRANSMIT_IR)== PackageManager.PERMISSION_GRANTED;
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.TRANSMIT_IR) == PackageManager.PERMISSION_GRANTED;
     }
 
     protected void requestIrPerm(){
@@ -76,4 +76,5 @@ public class BaseActivity extends AppCompatActivity {
             irManager.transmit(c.getFrequency(),c.getOnOffs());
         }
     }
+
 }

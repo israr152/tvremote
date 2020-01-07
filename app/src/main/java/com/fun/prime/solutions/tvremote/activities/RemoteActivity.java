@@ -1,12 +1,11 @@
 package com.fun.prime.solutions.tvremote.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import com.fun.prime.solutions.tvremote.IRButtonsAdapter;
+import com.fun.prime.solutions.tvremote.adapters.IRButtonsAdapter;
 import com.fun.prime.solutions.tvremote.R;
 import com.fun.prime.solutions.tvremote.codes.IRButton;
 import com.fun.prime.solutions.tvremote.codes.Manufacturer;
@@ -14,7 +13,6 @@ import com.fun.prime.solutions.tvremote.codes.Manufacturer;
 public class RemoteActivity extends BaseActivity {
     RecyclerView rvButtons;
     Manufacturer selectedMf;
-    int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +21,7 @@ public class RemoteActivity extends BaseActivity {
         enableBackButton();
         rvButtons = findViewById(R.id.rvButtons);
         String mfName = getIntent().getStringExtra("manufacturer");
-        mode = getIntent().getIntExtra("mode",-1);
+        int mode = getIntent().getIntExtra("mode",-1);
 
         if(mode==1 && mfName!=null){
             setTitle(mfName);
@@ -50,4 +48,5 @@ public class RemoteActivity extends BaseActivity {
             }
         });
     }
+
 }

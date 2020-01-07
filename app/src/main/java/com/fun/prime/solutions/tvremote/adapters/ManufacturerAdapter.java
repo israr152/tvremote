@@ -1,32 +1,34 @@
-package com.fun.prime.solutions.tvremote;
+package com.fun.prime.solutions.tvremote.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fun.prime.solutions.tvremote.codes.IRButton;
+import com.fun.prime.solutions.tvremote.R;
+import com.fun.prime.solutions.tvremote.codes.Manufacturer;
 
 import java.util.List;
 
-public class IRButtonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<IRButton> list;
+public class ManufacturerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context c;
+    private List<String> list;
     private ClickListener listener;
 
-    public IRButtonsAdapter(List<IRButton> list, Context c) {
-        this.list = list;
+    public ManufacturerAdapter(Context c, List<String> list) {
         this.c = c;
+        this.list = list;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(c).inflate(R.layout.listitem_irbutton,parent,false));
+        return new ViewHolder(LayoutInflater.from(c).inflate(R.layout.listitem_manufacturer,parent,false));
     }
 
     @Override
@@ -45,32 +47,33 @@ public class IRButtonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        Button btnIr;
+        TextView tvMf;
+        LinearLayout llMf;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            btnIr = itemView.findViewById(R.id.btnIr);
+            tvMf = itemView.findViewById(R.id.tvMf);
+            llMf = itemView.findViewById(R.id.llMf);
         }
 
-        public void bindData(final IRButton irButton) {
-            btnIr.setText(irButton.getDisplay());
-            btnIr.setOnClickListener(new View.OnClickListener() {
+        void bindData(final String name){
+            tvMf.setText(name);
+            llMf.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener!=null){
-                        listener.onButtonClick(irButton);
+                        listener.onManufactureClick(name);
                     }
                 }
             });
         }
     }
 
-    public interface ClickListener{
-        void onButtonClick(IRButton irButton);
+    public interface ClickListener {
+        void onManufactureClick(String mf);
     }
 
     public void setClickListener(ClickListener listener){
         this.listener = listener;
     }
-
 }

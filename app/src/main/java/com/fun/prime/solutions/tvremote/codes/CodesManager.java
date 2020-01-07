@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class CodesManager {
     private static CodesManager codeManager;
-    private final Map<String, Manufacturer> manufacturers = new LinkedHashMap();
+    private final Map<String, Manufacturer> manufacturers = new LinkedHashMap<>();
 
     private CodesManager(Context c) throws IOException, XmlPullParserException {
         XmlResourceParser parser = c.getResources().getXml(R.xml.button_codes);
