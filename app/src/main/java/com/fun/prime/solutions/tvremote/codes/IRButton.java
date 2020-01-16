@@ -12,9 +12,11 @@ public class IRButton {
         this.command = command;
         this.group = group;
     }
+
     public String getName() {
         return name;
     }
+
     public String getDisplay() {
         return display;
     }
@@ -22,6 +24,7 @@ public class IRButton {
     public String getGroup() {
         return group;
     }
+
     public IRCommand getCommand() {
         return command;
     }

@@ -7,12 +7,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.fun.prime.solutions.tvremote.IrCommand;
 import com.fun.prime.solutions.tvremote.R;
 import com.fun.prime.solutions.tvremote.codes.CodesManager;
 import com.fun.prime.solutions.tvremote.codes.IRButton;
@@ -55,6 +57,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void gotoActivity(Class actClass) {
+        startActivity(new Intent(this,actClass));
+    }
+
     protected boolean checkIrPerm(){
         return ContextCompat.checkSelfPermission(this, Manifest.permission.TRANSMIT_IR) == PackageManager.PERMISSION_GRANTED;
     }
@@ -75,6 +81,11 @@ public class BaseActivity extends AppCompatActivity {
         if(irManager!=null){
             irManager.transmit(c.getFrequency(),c.getOnOffs());
         }
+    }
+
+    protected void execNecCommand(IrCommand c){
+        IrCommand necCommand = IrCommand.NEC.buildNEC(24, 0x0000000000FF46B9);
+        irManager.transmit(c.frequency,c.pattern);
     }
 
 }

@@ -21,10 +21,11 @@ public class RemoteActivity extends BaseActivity {
         enableBackButton();
         rvButtons = findViewById(R.id.rvButtons);
         String mfName = getIntent().getStringExtra("manufacturer");
+        setTitle(mfName);
+
         int mode = getIntent().getIntExtra("mode",-1);
 
         if(mode==1 && mfName!=null){
-            setTitle(mfName);
             selectedMf = codesManager.getManufacturer(mfName);
         }
     }

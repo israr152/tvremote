@@ -66,11 +66,11 @@ public class IRButtonsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public interface ClickListener{
+    public interface ClickListener {
         void onButtonClick(IRButton irButton);
     }
 
-    public void setClickListener(ClickListener listener){
+    public void setClickListener(ClickListener listener) {
         this.listener = listener;
     }
 

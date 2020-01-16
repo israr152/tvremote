@@ -46,7 +46,7 @@ public class ManufacturerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return position;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMf;
         LinearLayout llMf;
 
@@ -56,7 +56,7 @@ public class ManufacturerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             llMf = itemView.findViewById(R.id.llMf);
         }
 
-        void bindData(final String name){
+        void bindData(final String name) {
             tvMf.setText(name);
             llMf.setOnClickListener(new View.OnClickListener() {
                 @Override

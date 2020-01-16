@@ -1,7 +1,5 @@
 package com.fun.prime.solutions.tvremote.codes;
 
-import com.fun.prime.solutions.tvremote.codes.IRButton;
-
 import java.util.List;
 
 public class Manufacturer {

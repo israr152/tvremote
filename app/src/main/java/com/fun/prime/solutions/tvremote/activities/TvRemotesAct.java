@@ -16,16 +16,16 @@ import android.widget.Toast;
 import com.fun.prime.solutions.tvremote.adapters.ManufacturerAdapter;
 import com.fun.prime.solutions.tvremote.R;
 
-public class MainActivity extends BaseActivity {
+public class TvRemotesAct extends BaseActivity {
     RecyclerView rvMf;
     TextView tvError;
     static String manufacturer;
-    private static boolean isBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        enableBackButton();
         tvError = findViewById(R.id.tvError);
         rvMf = findViewById(R.id.rvMf);
         initManufacturersList();
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         if(irManager.hasIrEmitter()){
             gotoRemoteActivity(mf,1);
         }else{
-            Toast.makeText(MainActivity.this, "This device does not support IR Mode!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TvRemotesAct.this, "This device does not support IR Mode!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -90,30 +90,13 @@ public class MainActivity extends BaseActivity {
             if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 if(manufacturer!=null){
                     checkIrAndGotoRemoteAct(manufacturer);
-                    manufacturer = null;
                 }
             }else{
-                manufacturer = null;
                 Toast.makeText(this, "Permission required to control TV!", Toast.LENGTH_SHORT).show();
             }
+            manufacturer = null;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(isBackPressed){
-            super.onBackPressed();
-        }else{
-            isBackPressed = true;
-            Toast.makeText(this, "Press again to exit!", Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    isBackPressed = false;
-                }
-            },2000);
-        }
     }
 
 }
