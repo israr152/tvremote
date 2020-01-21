@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +37,8 @@ public class TvRemotesAct extends BaseActivity {
         adapter.setClickListener(new ManufacturerAdapter.ClickListener() {
             @Override
             public void onManufactureClick(String mf) {
-                showModeOptions(mf);
+                //showModeOptions(mf);
+                checkIrAndGotoRemoteAct(mf);
             }
         });
     }
@@ -78,7 +78,7 @@ public class TvRemotesAct extends BaseActivity {
     }
 
     private void gotoRemoteActivity(String mf, int mode) {
-        Intent intent = new Intent(this,RemoteActivity.class);
+        Intent intent = new Intent(this, TvRemoteActivity.class);
         intent.putExtra("manufacturer",mf);
         intent.putExtra("mode",mode);
         startActivity(intent);

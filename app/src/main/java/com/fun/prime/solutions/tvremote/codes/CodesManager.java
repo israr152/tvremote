@@ -4,14 +4,15 @@ import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
 
-import com.fun.prime.solutions.tvremote.IrCommand;
+import com.fun.prime.solutions.tvremote.AcButton;
+import com.fun.prime.solutions.tvremote.AcIrCommand;
+import com.fun.prime.solutions.tvremote.AcManufacturer;
 import com.fun.prime.solutions.tvremote.R;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
 public class CodesManager {
     private static CodesManager codeManager;
     private final Map<String, Manufacturer> manufacturers = new LinkedHashMap<>();
-    private final Map<String,AcManufacturer> ac_manufaturers = new LinkedHashMap<>();
+    private final Map<String, AcManufacturer> ac_manufaturers = new LinkedHashMap<>();
 
     private CodesManager(Context c) throws IOException, XmlPullParserException {
         XmlResourceParser parser = c.getResources().getXml(R.xml.button_codes);
@@ -77,11 +78,11 @@ public class CodesManager {
 
         int data = Integer.decode(parser.nextText().trim());
 
-        IrCommand necCommand = IrCommand.NEC.buildNEC(bits, data);
+        AcIrCommand necCommand = AcIrCommand.NEC.buildNEC(bits, data);
 
         parser.require(XmlResourceParser.END_TAG, null, "code");
 
-        return new AcButton(name, display,type,bits,data,necCommand);
+        return new AcButton(name, display,type,necCommand);
     }
 
     private void parseManufacturers(XmlResourceParser parser) throws IOException, XmlPullParserException {

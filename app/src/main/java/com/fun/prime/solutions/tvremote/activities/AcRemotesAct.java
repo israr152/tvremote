@@ -1,6 +1,5 @@
 package com.fun.prime.solutions.tvremote.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,17 +9,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fun.prime.solutions.tvremote.R;
+import com.fun.prime.solutions.tvremote.codes.AcCodeManager;
 import com.fun.prime.solutions.tvremote.adapters.ManufacturerAdapter;
 
 public class AcRemotesAct extends BaseActivity {
     RecyclerView rvMf;
     TextView tvError;
-    static String manufacturer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ac_remote);
+        setContentView(R.layout.activity_ac_remotes);
         enableBackButton();
         tvError = findViewById(R.id.tvError);
         rvMf = findViewById(R.id.rvMf);
@@ -28,7 +27,7 @@ public class AcRemotesAct extends BaseActivity {
     }
 
     private void initManufacturersList() {
-        ManufacturerAdapter adapter = new ManufacturerAdapter(this,codesManager.getAcManufacturers());
+        ManufacturerAdapter adapter = new ManufacturerAdapter(this, AcCodeManager.getList(this,"ac_codes"));
         rvMf.setLayoutManager(new LinearLayoutManager(this));
         rvMf.setAdapter(adapter);
         adapter.setClickListener(new ManufacturerAdapter.ClickListener() {

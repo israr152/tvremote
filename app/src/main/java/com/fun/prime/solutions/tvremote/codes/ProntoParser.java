@@ -19,4 +19,5 @@ public class ProntoParser {
     public static void main(String[] args) {
         System.out.println(parsePronto("0000 006d 0000 0022 00ac 00ac 0015 0040 0015 0040 0015 0040 0015 0015 0015 0015 0015 0015 "));
     }
+
 }

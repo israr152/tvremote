@@ -14,6 +14,14 @@ public class MainMenuAct extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+//        try {
+//            JSONObject object = AcCodesManager.getJSONObjectFromFile(this,"LG AC","ac_codes/").getJSONObject("LG AC");
+//            Toast.makeText(this, ""+AcCodesManager.getList(this,"ac_codes").size(), Toast.LENGTH_SHORT).show();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void tvRemoteClick(View view) {

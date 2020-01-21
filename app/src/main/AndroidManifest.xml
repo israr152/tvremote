@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.RemoteActivity" />
+        <activity android:name=".activities.TvRemoteActivity" />
         <activity android:name=".activities.BaseActivity" />
         <activity
             android:name=".activities.TvRemotesAct"

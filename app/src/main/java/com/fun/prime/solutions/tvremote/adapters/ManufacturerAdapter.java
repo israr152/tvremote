@@ -73,7 +73,7 @@ public class ManufacturerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         void onManufactureClick(String mf);
     }
 
-    public void setClickListener(ClickListener listener){
+    public void setClickListener(ClickListener listener) {
         this.listener = listener;
     }
 }

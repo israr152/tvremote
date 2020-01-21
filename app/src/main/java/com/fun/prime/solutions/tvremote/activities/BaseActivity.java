@@ -14,10 +14,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.fun.prime.solutions.tvremote.IrCommand;
+import com.fun.prime.solutions.tvremote.AcIrCommand;
 import com.fun.prime.solutions.tvremote.R;
 import com.fun.prime.solutions.tvremote.codes.CodesManager;
-import com.fun.prime.solutions.tvremote.codes.IRButton;
 import com.fun.prime.solutions.tvremote.codes.IRCommand;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -61,12 +60,12 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(new Intent(this,actClass));
     }
 
-    protected boolean checkIrPerm(){
+    protected boolean checkIrPerm() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.TRANSMIT_IR) == PackageManager.PERMISSION_GRANTED;
     }
 
-    protected void requestIrPerm(){
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.TRANSMIT_IR},IR_PERM_REQ_CODE);
+    protected void requestIrPerm() {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.TRANSMIT_IR },IR_PERM_REQ_CODE);
     }
 
     @Override
@@ -77,15 +76,17 @@ public class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    protected void executeIrCommand(IRCommand c){
+    protected void executeIrCommand(IRCommand c) {
         if(irManager!=null){
             irManager.transmit(c.getFrequency(),c.getOnOffs());
         }
     }
 
-    protected void execNecCommand(IrCommand c){
-        IrCommand necCommand = IrCommand.NEC.buildNEC(24, 0x0000000000FF46B9);
-        irManager.transmit(c.frequency,c.pattern);
+    protected void execNecCommand(AcIrCommand c){
+//        IrCommand necCommand = IrCommand.NEC.buildNEC(24, 0x0000000000FF46B9);
+        if(irManager!=null){
+            irManager.transmit(c.frequency,c.pattern);
+        }
     }
 
 }

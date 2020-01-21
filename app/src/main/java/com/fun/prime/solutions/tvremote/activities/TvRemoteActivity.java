@@ -5,12 +5,12 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fun.prime.solutions.tvremote.adapters.IRButtonsAdapter;
 import com.fun.prime.solutions.tvremote.R;
+import com.fun.prime.solutions.tvremote.adapters.IRButtonsAdapter;
 import com.fun.prime.solutions.tvremote.codes.IRButton;
 import com.fun.prime.solutions.tvremote.codes.Manufacturer;
 
-public class RemoteActivity extends BaseActivity {
+public class TvRemoteActivity extends BaseActivity {
     RecyclerView rvButtons;
     Manufacturer selectedMf;
 
@@ -45,6 +45,7 @@ public class RemoteActivity extends BaseActivity {
         adapter.setClickListener(new IRButtonsAdapter.ClickListener() {
             @Override
             public void onButtonClick(IRButton irButton) {
+//                Toast.makeText(TvRemoteActivity.this, ""+irButton.getCommand().getOnOffs()[1], Toast.LENGTH_SHORT).show();
                 executeIrCommand(irButton.getCommand());
             }
         });
